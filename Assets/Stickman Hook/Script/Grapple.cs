@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    private string grappleTag = "Grapple";
+ 
     [SerializeField] DistanceJoint2D distanceJoint2D;
-
-    Vector2 grapplePoint;
+    [SerializeField] LineRenderer lineRenderer;
+    private string grappleTag = "Grapple";
+    private Vector2 grapplePoint;
 
     private void Start()
     {
         distanceJoint2D.enabled = false;
+        lineRenderer.enabled = false;
     }
 
     private void Update()
@@ -24,19 +26,44 @@ public class Grapple : MonoBehaviour
                 if(raycastHit2D.collider.gameObject.tag == grappleTag)
                 {
                     grapplePoint = raycastHit2D.point;
-                    distanceJoint2D.connectedAnchor = grapplePoint;
-                    distanceJoint2D.distance = 2f;
-                    distanceJoint2D.enabled = true;
-
-
+                    SetGrapple(grapplePoint);
+                    SetLine(grapplePoint);
+                    
                 }
 
             }
-            else
-            {
-                Debug.Log("Else called");
-            }
+
         }
+
+        if (lineRenderer.enabled == true) { 
+        
+            lineRenderer.SetPosition(1,transform.position);
+        }
+
+        if (Input.GetMouseButtonUp(0)) { 
+        
+            distanceJoint2D.enabled = false ;
+            lineRenderer.enabled = false;
+        }
+    }
+
+    private void SetGrapple(Vector3 point)
+    {
+        distanceJoint2D.connectedAnchor = point;
+        distanceJoint2D.distance = 2f;
+        distanceJoint2D.enabled = true;
+
+    }
+
+    private void SetLine(Vector3 point)
+    {
+        lineRenderer.SetPosition(0, point);
+        lineRenderer.SetPosition(1,transform.position);
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
+        lineRenderer.startColor = Color.blue;
+        lineRenderer.endColor = Color.blue;
+        lineRenderer.enabled = true;
     }
 
 }
