@@ -8,6 +8,7 @@ TagManager:
   - Brick
   - Bridge
   - Exit
+  - Grapple
   layers:
   - Default
   - TransparentFX
