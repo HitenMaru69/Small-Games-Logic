@@ -17,7 +17,6 @@ public class CreateBridge : MonoBehaviour
             BridgeCreate();
             isTrigger = false;
         }
-
        
     }
 
@@ -32,7 +31,7 @@ public class CreateBridge : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject== lastObject && collision.gameObject.tag == bridgeTag)
+        if(collision.gameObject == lastObject && collision.gameObject.tag == bridgeTag)
         {
             if (isOnBridge) {
                 BridgeCreate();
@@ -43,10 +42,15 @@ public class CreateBridge : MonoBehaviour
 
     private void BridgeCreate()
     {
-        GameObject newSpwanObject = Instantiate(brick,spwanTransform.position,Quaternion.identity);
-        newSpwanObject.transform.rotation = Quaternion.Euler(0,90,0);
-        lastObject = newSpwanObject;
-        ChnageSpwanTransform();
+        if (BrickManager.instance.CheckTotalBrick() > 0)
+        {
+            GameObject newSpwanObject = Instantiate(brick, spwanTransform.position, Quaternion.identity);
+            newSpwanObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+            lastObject = newSpwanObject;
+            BrickManager.instance.RemoveBrick();
+            ChnageSpwanTransform();
+
+        }
         
     }
 

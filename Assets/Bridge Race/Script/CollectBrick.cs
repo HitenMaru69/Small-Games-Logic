@@ -21,6 +21,7 @@ public class CollectBrick : MonoBehaviour
         GameObject newObject = Instantiate(spwanObject, transform);
         newObject.transform.position = spwanTransform.position;
         newObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        BrickManager.instance.UpdateTotalBrickCount(newObject);
         ChangeSpwanTransform();
     }
 
