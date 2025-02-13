@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DetectedImage
   - Brick
+  - Bridge
+  - Exit
   layers:
   - Default
   - TransparentFX
