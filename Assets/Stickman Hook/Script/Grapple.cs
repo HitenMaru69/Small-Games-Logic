@@ -50,7 +50,8 @@ public class Grapple : MonoBehaviour
     private void SetGrapple(Vector3 point)
     {
         distanceJoint2D.connectedAnchor = point;
-        distanceJoint2D.distance = 2f;
+        //distanceJoint2D.distance = 2f;
+       // distanceJoint2D.autoConfigureDistance = false;  if we use this than we have to manully assign distance to the object and point
         distanceJoint2D.enabled = true;
 
     }
