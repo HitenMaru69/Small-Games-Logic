@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - DetectedImage
+  - Brick
   layers:
   - Default
   - TransparentFX
