@@ -8,9 +8,11 @@ public class Block : MonoBehaviour
 
     public void OnClickButton()
     {
-        txt.text = "X";
 
+        txt.text = GameManager.instance.SetPlayerSideTxt();
         GameManager.instance.CheckForWinnCondition();
+        GameManager.instance.ChangeTurn();
+
 
     }
 
