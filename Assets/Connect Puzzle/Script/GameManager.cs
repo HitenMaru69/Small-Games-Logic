@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> puzzleObject =  new ();
     public List<GameObject> matchObjects = new();
 
+    private int TotalMatch = 6; // You can add dinmamically by making puzzle and add them in Scriptable Object
+
     private void Awake()
     {
         instance = this;
@@ -27,29 +29,32 @@ public class GameManager : MonoBehaviour
 
     public void CheckForWinn()
     {
+        if (puzzleObject.Count + matchObjects.Count != TotalMatch) { return; }
+
         int count = 0;
-        if (puzzleObject.Count >= 3 && matchObjects.Count >= 3)
+
+        for (int i = 0; i < puzzleObject.Count; i++)
         {
-            for(int i = 0; i < puzzleObject.Count; i++)
+            PuzzleObject puzzleObject1 = puzzleObject[i].GetComponent<PuzzleObject>();
+            PuzzleObject puzzleObject2 = matchObjects[i].GetComponent<PuzzleObject>();
+
+
+            if (puzzleObject1.GetPuzzleObjectNumber() == puzzleObject2.GetPuzzleObjectNumber())
             {
-                PuzzleObject puzzleObject1 = puzzleObject[i].GetComponent<PuzzleObject>();
-                PuzzleObject puzzleObject2 = matchObjects[i].GetComponent<PuzzleObject>();
-                
-
-                if(puzzleObject1.GetPuzzleObjectNumber() == puzzleObject2.GetPuzzleObjectNumber())
-                {
-                    count++;
-                }
-            }
-
-            if (count >= 3) {
-
-                Debug.Log("You winn");
-            }
-            else
-            {
-                Debug.Log("lose");
+                count++;
             }
         }
+
+        if (count >= TotalMatch/2)
+        {
+
+            Debug.Log("You winn");
+        }
+        else
+        {
+            Debug.Log("lose");
+        }
+
+
     }
 }
