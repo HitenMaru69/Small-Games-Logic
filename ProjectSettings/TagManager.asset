@@ -11,6 +11,8 @@ TagManager:
   - Grapple
   - Enemy
   - GrapObject
+  - Puzzle
+  - Match
   layers:
   - Default
   - TransparentFX
