@@ -8,5 +8,6 @@ public class ClickDetect : MonoBehaviour
     public void OnClickImage()
     {    
         Gamemanager.instance.AddObjectToTheList(gameObject);
+        Gamemanager.instance.CheckForMatch(gameObject);
     }
 }

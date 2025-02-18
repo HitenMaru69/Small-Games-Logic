@@ -6,8 +6,9 @@ public class Gamemanager : MonoBehaviour
     public static Gamemanager instance;
 
     [SerializeField] private List<GameObject> totalBox;
-    [SerializeField] private List<GameObject> selectedObject = new();
-    
+    private List<GameObject> selectedObject = new();
+    private List<GameObject> destroyObject = new();
+
 
     private void Awake()
     {
@@ -34,8 +35,47 @@ public class Gamemanager : MonoBehaviour
         }
     }
 
-    public void CheckForMatch()
+    public void CheckForMatch(GameObject obj)
     {
 
+       destroyObject.Clear();
+
+        ClickDetect clickDetect = obj.GetComponent<ClickDetect>();
+
+        int number = clickDetect.number;
+
+        int count = 0;
+
+        for(int i = 0; i < selectedObject.Count; i++)
+        {
+
+            ClickDetect clickDetect1 = selectedObject[i].GetComponent<ClickDetect>();
+
+            if(clickDetect1.number == number)
+            {
+                count++;
+                if (!destroyObject.Contains(selectedObject[i]))
+                {
+                    destroyObject.Add(selectedObject[i]);
+                }
+            }
+            
+            if(count >= 3)
+            {
+
+                selectedObject.RemoveAll(obj=>obj.GetComponent<ClickDetect>().number == number);
+
+                for (int j = 0; j < destroyObject.Count; j++)
+                {
+                    ClickDetect clickDetect2 = destroyObject[j].GetComponent<ClickDetect>();
+
+                    if (clickDetect2.number == number)
+                    {
+                        Destroy(clickDetect2.gameObject);
+                    }
+                }
+
+            }
+        }
     }
 }
