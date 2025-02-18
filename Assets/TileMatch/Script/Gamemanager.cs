@@ -23,22 +23,32 @@ public class Gamemanager : MonoBehaviour
 
     public void MoveObject()
     {
-        for (int i = 0; i < selectedObject.Count; i++)
+        if (selectedObject.Count <= totalBox.Count)
         {
-            RectTransform rectTransform1 = totalBox[i].GetComponent<RectTransform>();
-            RectTransform rectTransform2 = selectedObject[i].GetComponent<RectTransform>();
-
-            if (rectTransform2.anchoredPosition != rectTransform1.anchoredPosition)
+            for (int i = 0; i < selectedObject.Count; i++)
             {
-                rectTransform2.anchoredPosition = rectTransform1.anchoredPosition;
+                RectTransform rectTransform1 = totalBox[i].GetComponent<RectTransform>();
+                RectTransform rectTransform2 = selectedObject[i].GetComponent<RectTransform>();
+
+                if (rectTransform2.anchoredPosition != rectTransform1.anchoredPosition)
+                {
+                    rectTransform2.anchoredPosition = rectTransform1.anchoredPosition;
+                }
             }
+
         }
+
     }
 
     public void CheckForMatch(GameObject obj)
     {
+        if (selectedObject.Count >= totalBox.Count)
+        {
+            Debug.Log("You Lose ");
+            return;
+        }
 
-       destroyObject.Clear();
+        destroyObject.Clear();
 
         ClickDetect clickDetect = obj.GetComponent<ClickDetect>();
 
@@ -62,7 +72,6 @@ public class Gamemanager : MonoBehaviour
             
             if(count >= 3)
             {
-
                 selectedObject.RemoveAll(obj=>obj.GetComponent<ClickDetect>().number == number);
 
                 for (int j = 0; j < destroyObject.Count; j++)
@@ -75,7 +84,11 @@ public class Gamemanager : MonoBehaviour
                     }
                 }
 
+                Invoke(nameof(MoveObject), 0.5f);
+
             }
         }
     }
+
+    
 }
