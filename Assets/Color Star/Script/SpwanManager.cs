@@ -5,21 +5,44 @@ using UnityEngine;
 
 public class SpwanManager : MonoBehaviour
 {
+    public static SpwanManager instance;
+
     [SerializeField] private List<GameObject> spwanPoint;
     [SerializeField] private List <int> spwanWaypoints;
     [SerializeField] private GameObject spwanObject;
+    private int totalBall;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
         Invoke(nameof(SpwanBall),0.5f);
     }
 
+
+    public void RemoveTotalBall()
+    {
+        totalBall--;
+
+        if (totalBall <= 0) {
+
+            SpwanBall();
+
+        }
+    }
+
+
+
     private void SpwanBall()
     {
         spwanWaypoints.Clear();
 
-        int randomnumber = Random.Range(1, 4);
+        int randomnumber = Random.Range(3, 6);
+
+        totalBall = randomnumber;
         
         for (int i = 0; i < randomnumber; i++)
         {
@@ -36,17 +59,16 @@ public class SpwanManager : MonoBehaviour
 
     private int GetRandomNumber()
     {
-        int randomSpwanPoint = Random.Range(0, spwanPoint.Count);
-        if (spwanWaypoints.Contains(randomSpwanPoint))
+        int randomSpwanPoint;
+        do
         {
-            GetRandomNumber();
+            randomSpwanPoint = Random.Range(0, spwanPoint.Count);
         }
-        else
-        {
-            spwanWaypoints.Add(randomSpwanPoint);
-        }
+        while(spwanWaypoints.Contains(randomSpwanPoint));
 
+        spwanWaypoints.Add(randomSpwanPoint);
         return randomSpwanPoint;
+
     }
 
 
