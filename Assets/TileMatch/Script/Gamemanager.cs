@@ -6,6 +6,8 @@ public class Gamemanager : MonoBehaviour
     public static Gamemanager instance;
 
     [SerializeField] private List<GameObject> totalBox;
+    [SerializeField] Stack<GameObject> stack = new();
+    [SerializeField] Vector3 lastObjectPosition;
     private List<GameObject> selectedObject = new();
     private List<GameObject> destroyObject = new();
 
@@ -15,9 +17,18 @@ public class Gamemanager : MonoBehaviour
         instance = this;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Undo();
+        }
+    }
+
     public void AddObjectToTheList(GameObject obj)
     {
         selectedObject.Add(obj);
+        TrachObjectForUndo(obj);
         MoveObject();
     }
 
@@ -81,6 +92,7 @@ public class Gamemanager : MonoBehaviour
                     if (clickDetect2.number == number)
                     {
                         Destroy(clickDetect2.gameObject);
+                        stack.Clear();
                     }
                 }
 
@@ -90,5 +102,22 @@ public class Gamemanager : MonoBehaviour
         }
     }
 
+    private void TrachObjectForUndo(GameObject obj)
+    {
+        stack.Clear();
+        stack.Push(obj);
+        lastObjectPosition = obj.GetComponent<RectTransform>().anchoredPosition;
+    }
+
+    private void Undo()
+    {
+        if (stack.Count > 0)
+        {
+            GameObject obj = stack.Pop();
+            RectTransform rect = obj.GetComponent<RectTransform>();
+            rect.anchoredPosition = lastObjectPosition;
+            selectedObject.Remove(obj);
+        }
+    }
     
 }
