@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spwanTransform: {fileID: 495989993}
+  startingSpwanPosition: {fileID: 0}
 --- !u!114 &378237570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,6 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a7fe6073ebb2f4b8dd76f951ae18f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bridge: {fileID: 378237569}
 --- !u!1 &1137805809
 GameObject:
   m_ObjectHideFlags: 0
