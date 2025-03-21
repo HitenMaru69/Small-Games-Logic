@@ -12,7 +12,6 @@ public class MovingWall : MonoBehaviour
     private void MoveWall()
     {
         transform.Translate(Vector3.left * movingSpeed * Time.deltaTime);
-
     }
 
 }
