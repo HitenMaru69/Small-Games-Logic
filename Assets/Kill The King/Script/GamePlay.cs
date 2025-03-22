@@ -5,6 +5,7 @@ public class GamePlay : MonoBehaviour
 {
     [SerializeField] Image slider;
     [SerializeField] float totalTimeToKill;
+    [SerializeField] GameObject KingObject; // Temp
 
     private float currenttime = 0;
     private bool istryToKill;
@@ -43,8 +44,13 @@ public class GamePlay : MonoBehaviour
             slider.fillAmount = currentAmount;
             currenttime += Time.deltaTime;
         }
-
-        
+        else
+        {
+            // Add Kill King Functionality
+            Debug.Log("Kill");
+            KingObject.SetActive(false);
+            ResetKillProgress();
+        }
     }
 
     private void ResetKillProgress()
