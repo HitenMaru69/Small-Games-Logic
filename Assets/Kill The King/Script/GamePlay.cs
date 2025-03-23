@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +6,7 @@ public class GamePlay : MonoBehaviour
 {
     [SerializeField] Image slider;
     [SerializeField] float totalTimeToKill;
-    [SerializeField] GameObject KingObject; // Temp
+    [SerializeField] Player player;
 
     private float currenttime = 0;
     private bool istryToKill;
@@ -43,13 +44,12 @@ public class GamePlay : MonoBehaviour
             float currentAmount = currenttime / totalTimeToKill;
             slider.fillAmount = currentAmount;
             currenttime += Time.deltaTime;
+            player.RotateKnife();
         }
         else
         {
-            // Add Kill King Functionality
-            Debug.Log("Kill");
-            KingObject.SetActive(false);
             ResetKillProgress();
+            EventManager.Instance.InvokeKillKingEvent();
         }
     }
 
@@ -58,6 +58,9 @@ public class GamePlay : MonoBehaviour
         istryToKill=false;
         currenttime = 0;
         slider.fillAmount = 0;
+        player.ResetKnifeValue();
 
     }
+
+
 }
