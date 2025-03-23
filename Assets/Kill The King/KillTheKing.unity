@@ -522,6 +522,7 @@ GameObject:
   - component: {fileID: 640511540}
   - component: {fileID: 640511539}
   - component: {fileID: 640511543}
+  - component: {fileID: 640511544}
   m_Layer: 0
   m_Name: King
   m_TagString: Untagged
@@ -647,6 +648,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &640511544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640511538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c57aafe0406248429002210a266408c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsuleCollider: {fileID: 640511539}
 --- !u!1 &663625733
 GameObject:
   m_ObjectHideFlags: 0

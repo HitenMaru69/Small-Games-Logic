@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject knife;
     [SerializeField] float knifeRotateSpeed;
 
-    private float distance;
+    [SerializeField]private float distance;
     private float distanceBetweenPlayerAndKing = 4;
  
     private void Start()
@@ -38,9 +38,10 @@ public class Player : MonoBehaviour
 
     private void OnkillKing(object sender, System.EventArgs e)
     {
-        distanceBetweenPlayerAndKing = 0.5f;
+        distanceBetweenPlayerAndKing = 2.1f;
+        AttactWithKnife();
         StartCoroutine(MovePlayerTowordsTheKing());
-        king.SetActive(false);
+        EventManager.Instance.InvokeDieKingEvent();
     }
 
     public void RotateKnife()
@@ -52,4 +53,15 @@ public class Player : MonoBehaviour
     {
         knife.transform.rotation = Quaternion.identity;
     }
+
+    private void AttactWithKnife()
+    {
+        knife.transform.parent = king.transform;
+        Vector3 newPos = knife.transform.localPosition;
+        newPos.x = -2.2f;
+        knife.transform.localPosition = newPos;
+        king.transform.rotation = Quaternion.Euler(0, 0, -90);
+        knife.transform.localRotation = Quaternion.identity;
+    }
+
 }

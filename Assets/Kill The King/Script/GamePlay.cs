@@ -33,7 +33,11 @@ public class GamePlay : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            ResetKillProgress();
+            if (istryToKill)
+            {
+                ResetKillProgress();
+                player.ResetKnifeValue();
+            }
         }
     }
 
@@ -58,8 +62,6 @@ public class GamePlay : MonoBehaviour
         istryToKill=false;
         currenttime = 0;
         slider.fillAmount = 0;
-        player.ResetKnifeValue();
-
     }
 
 

@@ -5,7 +5,6 @@ public class MovingWall : MonoBehaviour
     [SerializeField] float movingSpeed;
     private bool isMove = true;
 
-
     private void OnEnable()
     {
         EventManager.Instance.KillKingEvent += StopwallaMovement;
