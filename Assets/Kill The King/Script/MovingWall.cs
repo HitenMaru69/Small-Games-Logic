@@ -24,6 +24,17 @@ public class MovingWall : MonoBehaviour
         EventManager.Instance.KillKingEvent -= StopwallaMovement;
     }
 
+
+    public bool StopMovingWall()
+    {
+        return isMove = false;
+    }
+
+    public bool ResumeMovingWall()
+    {
+        return isMove = true;
+    }
+
     private void MoveWall()
     {
         transform.Translate(Vector3.left * movingSpeed * Time.deltaTime);

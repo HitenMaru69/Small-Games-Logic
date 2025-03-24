@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class SpawnWall : MonoBehaviour
 {
@@ -10,6 +11,24 @@ public class SpawnWall : MonoBehaviour
     private void Update()
     {
         RemoveWall();
+    }
+
+    public void StopMovingWall()
+    {
+        foreach (GameObject wall in walls) { 
+        
+            MovingWall movingWall = wall.GetComponent<MovingWall>();
+            movingWall.StopMovingWall();
+        }
+    }
+
+    public void ResumeMovingWall()
+    {
+        foreach (GameObject wall in walls)
+        {
+            MovingWall movingWall = wall.GetComponent<MovingWall>();
+            movingWall.ResumeMovingWall();
+        }
     }
 
     private void RemoveWall()
