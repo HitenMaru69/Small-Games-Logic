@@ -41,6 +41,12 @@ public class GamePlay : MonoBehaviour
         }
     }
 
+
+    public bool ChekIftryToKill()
+    {
+        return istryToKill;
+    }
+
     private void UpdateKillProgress()
     {
         if (currenttime < totalTimeToKill) 

@@ -25,6 +25,17 @@ public class Player : MonoBehaviour
         EventManager.Instance.KillKingEvent -= OnkillKing;
     }
 
+    public void RotateKnife()
+    {
+        knife.transform.Rotate(0, 0, 1 * knifeRotateSpeed * Time.deltaTime);
+    }
+
+    public void ResetKnifeValue()
+    {
+        knife.transform.rotation = Quaternion.identity;
+    }
+
+
     IEnumerator MovePlayerTowordsTheKing()
     {
         while (distance >= distanceBetweenPlayerAndKing)
@@ -44,15 +55,6 @@ public class Player : MonoBehaviour
         EventManager.Instance.InvokeDieKingEvent();
     }
 
-    public void RotateKnife()
-    {
-        knife.transform.Rotate(0, 0, 1 * knifeRotateSpeed * Time.deltaTime);
-    }
-
-    public void ResetKnifeValue()
-    {
-        knife.transform.rotation = Quaternion.identity;
-    }
 
     private void AttactWithKnife()
     {

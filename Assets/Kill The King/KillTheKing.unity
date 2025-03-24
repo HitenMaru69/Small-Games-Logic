@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 211149917}
   - component: {fileID: 211149916}
   - component: {fileID: 211149915}
+  - component: {fileID: 211149918}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -276,6 +277,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211149913}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &211149918
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211149913}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 4a0b4159c9cb8484faea6592bdf53b98, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 4a0b4159c9cb8484faea6592bdf53b98, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &261413991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5145528466092258971, guid: 27ba61a8908f9be4d887327ed55184bd, type: 3}
@@ -770,7 +788,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capsuleCollider: {fileID: 640511539}
+  animations: {fileID: 211149918}
   spawnWall: {fileID: 68716398}
+  gamePlay: {fileID: 751220010}
 --- !u!1 &663625733
 GameObject:
   m_ObjectHideFlags: 0

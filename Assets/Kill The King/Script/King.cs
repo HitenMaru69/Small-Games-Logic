@@ -4,11 +4,14 @@ using UnityEngine;
 public class King : MonoBehaviour
 {
     [SerializeField] CapsuleCollider capsuleCollider;
+    [SerializeField] Animation animations;
     [SerializeField] SpawnWall spawnWall;
-
+    [SerializeField] GamePlay gamePlay;
+    
     private void Start()
     {
         EventManager.Instance.DieKingEvent += OnKingDie;
+        StartCoroutine(TryToCatchPlayer());
     }
 
     private void OnDisable()
@@ -21,11 +24,24 @@ public class King : MonoBehaviour
         Vector3 kingNewPos = transform.position;
         kingNewPos.z = kingNewPos.z + 2;
         transform.position = kingNewPos;
+        StopAllCoroutines();
     }
 
 
 
+    IEnumerator TryToCatchPlayer()
+    {
+        
+        int timeforTurn = Random.Range(5, 15);
+        yield return new WaitForSeconds(timeforTurn);
+        animations.Play();
+        yield return new WaitForSeconds(1);
+        TurnKing();
+        yield return new WaitForSeconds(2);
+        BackToNormal();
+        StartCoroutine(TryToCatchPlayer());
 
+    }
 
 
 
@@ -34,6 +50,11 @@ public class King : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 180, 0);
         spawnWall.StopMovingWall();
+        if (gamePlay.ChekIftryToKill() == true)
+        {
+            // Add Logic for catch Player
+            Debug.Log("Player diie");
+        }
     }
 
     [ContextMenu("BackToNormal")]
