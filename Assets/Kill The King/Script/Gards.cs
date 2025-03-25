@@ -18,6 +18,7 @@ public class Gards : MonoBehaviour
         EventManager.Instance.CatchKillerEvent += MoveToCatchPlayer;
     }
 
+
     private void OnDisable()
     {
         EventManager.Instance.CatchKillerEvent -= MoveToCatchPlayer;
@@ -38,6 +39,22 @@ public class Gards : MonoBehaviour
             }
                 
             isMoveToCatchPlayer=false;
+            transform.rotation = Quaternion.Euler(0,180,0);
+            StartCoroutine(ReturnTotheStartingPos());
+
+        }
+        
+    }
+
+    IEnumerator ReturnTotheStartingPos()
+    {
+        dis = Vector3.Distance(transform.position, startPos.transform.position);
+
+        while (dis >= 3f)
+        {
+            transform.Translate(Vector3.right * gardMoveSpeed * Time.deltaTime);
+            dis = Vector3.Distance(transform.position, player.transform.position);
+            yield return null;
         }
         
     }
