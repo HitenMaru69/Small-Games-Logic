@@ -52,7 +52,7 @@ public class King : MonoBehaviour
         spawnWall.StopMovingWall();
         if (gamePlay.ChekIftryToKill() == true)
         {
-            // Add Logic for catch Player
+            EventManager.Instance.InvokeCatchKillerEvent();
             Debug.Log("Player diie");
         }
     }

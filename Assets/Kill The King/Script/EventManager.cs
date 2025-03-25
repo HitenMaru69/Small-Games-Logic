@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
 
     public event EventHandler KillKingEvent;
     public event EventHandler DieKingEvent;
+    public event EventHandler CatchKillerEvent;
     private void Awake()
     {
         Instance = this;
@@ -20,6 +21,11 @@ public class EventManager : MonoBehaviour
     public void InvokeDieKingEvent()
     {
         DieKingEvent?.Invoke(this,EventArgs.Empty);
+    }
+
+    public void InvokeCatchKillerEvent() 
+    {
+        CatchKillerEvent?.Invoke(this,EventArgs.Empty);
     }
 
 
