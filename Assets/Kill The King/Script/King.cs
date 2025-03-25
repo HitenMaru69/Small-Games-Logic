@@ -27,8 +27,6 @@ public class King : MonoBehaviour
         StopAllCoroutines();
     }
 
-
-
     IEnumerator TryToCatchPlayer()
     {
         
@@ -44,15 +42,16 @@ public class King : MonoBehaviour
     }
 
 
-
     [ContextMenu("TurnKing")]
     public void TurnKing()
     {
         transform.rotation = Quaternion.Euler(0, 180, 0);
         spawnWall.StopMovingWall();
+
         if (gamePlay.ChekIftryToKill() == true)
         {
             EventManager.Instance.InvokeCatchKillerEvent();
+            StopAllCoroutines();
             Debug.Log("Player diie");
         }
     }

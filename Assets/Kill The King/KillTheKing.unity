@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: {fileID: 1576574857}
   player: {fileID: 2030010328}
-  gardMoveSpeed: 2
+  gardMoveSpeed: 5
   dis: 0
 --- !u!1 &1487129537
 GameObject:
@@ -1954,7 +1954,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPos: {fileID: 1711807262}
   player: {fileID: 2030010328}
-  gardMoveSpeed: 2
+  gardMoveSpeed: 5
   dis: 0
 --- !u!1001 &4618312689387204
 PrefabInstance:

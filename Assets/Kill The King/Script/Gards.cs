@@ -18,18 +18,6 @@ public class Gards : MonoBehaviour
         EventManager.Instance.CatchKillerEvent += MoveToCatchPlayer;
     }
 
-
-    private void Update()
-    {
-        dis = Vector3.Distance(transform.position, player.transform.position);
-        
-        if(dis >= 3f)
-        {
-            transform.Translate(Vector3.right * gardMoveSpeed * Time.deltaTime);
-        }
-        
-    }
-
     private void OnDisable()
     {
         EventManager.Instance.CatchKillerEvent -= MoveToCatchPlayer;
@@ -38,12 +26,26 @@ public class Gards : MonoBehaviour
 
     IEnumerator MoveTothePlayer()
     {
-        yield return null;
+        if (isMoveToCatchPlayer) {
+
+            dis = Vector3.Distance(transform.position, player.transform.position);
+
+            while (dis >= 3f)
+            {
+                transform.Translate(Vector3.right * gardMoveSpeed * Time.deltaTime);
+                dis = Vector3.Distance(transform.position, player.transform.position);
+                yield return null;
+            }
+                
+            isMoveToCatchPlayer=false;
+        }
+        
     }
 
     private void MoveToCatchPlayer(object sender, System.EventArgs e)
     {
         isMoveToCatchPlayer = true;
+        StartCoroutine(MoveTothePlayer());
     }
 
 
