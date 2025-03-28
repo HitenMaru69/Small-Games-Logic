@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Gards : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class Gards : MonoBehaviour
     [SerializeField] float gardMoveSpeed;
 
     private bool isMoveToCatchPlayer;
-
-    [SerializeField] float dis;
+    private float dis;
 
     private void Start()
     {
@@ -53,9 +53,16 @@ public class Gards : MonoBehaviour
         while (dis >= 3f)
         {
             transform.Translate(Vector3.right * gardMoveSpeed * Time.deltaTime);
-            dis = Vector3.Distance(transform.position, player.transform.position);
+            PlayerMoveWithGards();
+            dis = Vector3.Distance(transform.position, startPos.transform.position); 
             yield return null;
         }
+
+        transform.rotation = Quaternion.identity;
+
+        // Temp Solution
+        SceneManager.LoadScene("KillTheKing"); 
+        // Plan to not load Scene but again player go for king and start same game play again whthout Load scene
         
     }
 
@@ -63,6 +70,14 @@ public class Gards : MonoBehaviour
     {
         isMoveToCatchPlayer = true;
         StartCoroutine(MoveTothePlayer());
+    }
+
+    private void PlayerMoveWithGards()
+    {
+        Vector3 playerPos = player.transform.position;
+        Vector3 gardPos = transform.position;
+        playerPos.x = gardPos.x + 2;
+        player.transform.position = playerPos;
     }
 
 
