@@ -523,6 +523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 751220011}
   - component: {fileID: 751220010}
+  - component: {fileID: 751220012}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: Untagged
@@ -560,6 +561,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &751220012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751220009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b4db16d8b9d434c99578676d26a8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2030010334}
+  gamePlay: {fileID: 751220010}
+  spawnWall: {fileID: 68716398}
+  playerlifeTime: 20
 --- !u!1 &918980055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6482012124397706405, guid: ba92bed8f24b5f74caf39567d152db6e, type: 3}

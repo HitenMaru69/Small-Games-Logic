@@ -51,6 +51,11 @@ public class Player : MonoBehaviour
         knife.transform.rotation = Quaternion.identity;
     }
 
+    public void RotatePlayer(Vector3 dir)
+    {
+        transform.rotation = Quaternion.Euler(dir);
+    }
+
     public playerState GetPlayerState()
     {
         return state;

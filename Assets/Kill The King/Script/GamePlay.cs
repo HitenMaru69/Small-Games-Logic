@@ -6,7 +6,7 @@ public class GamePlay : MonoBehaviour
 {
     [SerializeField] Image slider;
     [SerializeField] float totalTimeToKill;
-    [SerializeField] Player player;
+    [SerializeField] Player player;     
 
     private float currenttime = 0;
     private bool istryToKill;
@@ -19,7 +19,7 @@ public class GamePlay : MonoBehaviour
 
     private void Update()
     {
-        if(player.GetPlayerState() == playerState.Player)
+        if (player.GetPlayerState() == playerState.Player)  // This will be call when player try to kill king
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -44,7 +44,6 @@ public class GamePlay : MonoBehaviour
             }
         }
 
-
     }
 
     private void OnDisable()
@@ -55,6 +54,11 @@ public class GamePlay : MonoBehaviour
     public bool ChekIftryToKill()
     {
         return istryToKill;
+    }
+
+    public Image GetSliderImage()
+    {
+        return slider;
     }
 
     private void UpdateKillProgress()
