@@ -13,34 +13,44 @@ public class GamePlay : MonoBehaviour
 
     private void Start()
     {
-         ResetKillProgress();
+        ResetKillProgress();
+        EventManager.Instance.DieKingEvent += ChangeSliderValue;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(player.GetPlayerState() == playerState.Player)
         {
-            istryToKill = true;
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (istryToKill)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                UpdateKillProgress();
+                istryToKill = true;
+            }
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (istryToKill)
+                {
+                    UpdateKillProgress();
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                if (istryToKill)
+                {
+                    ResetKillProgress();
+                    player.ResetKnifeValue();
+                }
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            if (istryToKill)
-            {
-                ResetKillProgress();
-                player.ResetKnifeValue();
-            }
-        }
+
     }
 
+    private void OnDisable()
+    {
+        EventManager.Instance.DieKingEvent -= ChangeSliderValue;
+    }
 
     public bool ChekIftryToKill()
     {
@@ -70,5 +80,9 @@ public class GamePlay : MonoBehaviour
         slider.fillAmount = 0;
     }
 
+    private void ChangeSliderValue(object sender, System.EventArgs e)
+    {
+        slider.fillAmount = 1;
+    }
 
 }

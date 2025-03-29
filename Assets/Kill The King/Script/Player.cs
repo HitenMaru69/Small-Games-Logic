@@ -1,18 +1,34 @@
 using System.Collections;
 using UnityEngine;
 
+public enum playerState
+{
+    Player,
+    King
+}
+
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject king;
     [SerializeField] float playerSpeed;
     [SerializeField] GameObject knife;
+    [SerializeField] GameObject eye;
     [SerializeField] float knifeRotateSpeed;
+    [SerializeField] private float distance;
 
-    [SerializeField]private float distance;
     private float distanceBetweenPlayerAndKing = 4;
- 
+
+    [Space(10)]
+    [Header("For Player State")]
+    [Header("After player become king")]
+    [SerializeField] playerState state;
+    [SerializeField] SpawnWall spawnWall;
+
+    
+
     private void Start()
     {
+        state = playerState.Player;
         distance = Vector3.Distance(transform.position, king.transform.position);
         StartCoroutine(MovePlayerTowordsTheKing());
 
@@ -35,6 +51,10 @@ public class Player : MonoBehaviour
         knife.transform.rotation = Quaternion.identity;
     }
 
+    public playerState GetPlayerState()
+    {
+        return state;
+    }
 
     IEnumerator MovePlayerTowordsTheKing()
     {
@@ -45,12 +65,21 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
+        if(state == playerState.King)
+        {
+            knife.gameObject.SetActive(false);
+            eye.gameObject.SetActive(true);
+            spawnWall.ResumeMovingWall();
+            king.SetActive(false);
+        }
+
     }
 
     private void OnkillKing(object sender, System.EventArgs e)
     {
         distanceBetweenPlayerAndKing = 2.1f;
         AttactWithKnife();
+        state = playerState.King;
         StartCoroutine(MovePlayerTowordsTheKing());
         EventManager.Instance.InvokeDieKingEvent();
     }

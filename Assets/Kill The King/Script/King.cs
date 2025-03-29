@@ -19,14 +19,6 @@ public class King : MonoBehaviour
         EventManager.Instance.DieKingEvent -= OnKingDie;
     }
 
-    private void OnKingDie(object sender, System.EventArgs e)
-    {
-        Vector3 kingNewPos = transform.position;
-        kingNewPos.z = kingNewPos.z + 2;
-        transform.position = kingNewPos;
-        StopAllCoroutines();
-    }
-
     IEnumerator TryToCatchPlayer()
     {
         
@@ -48,12 +40,12 @@ public class King : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 180, 0);
         spawnWall.StopMovingWall();
 
-        if (gamePlay.ChekIftryToKill() == true)
-        {
-            EventManager.Instance.InvokeCatchKillerEvent();
-            StopAllCoroutines();
-            Debug.Log("Player diie");
-        }
+        //if (gamePlay.ChekIftryToKill() == true)
+        //{
+        //    EventManager.Instance.InvokeCatchKillerEvent();
+        //    StopAllCoroutines();
+        //    Debug.Log("Player diie");
+        //}
     }
 
     [ContextMenu("BackToNormal")]
@@ -62,4 +54,13 @@ public class King : MonoBehaviour
         transform.rotation = Quaternion.identity;
         spawnWall.ResumeMovingWall();
     }
+
+    private void OnKingDie(object sender, System.EventArgs e)
+    {
+        Vector3 kingNewPos = transform.position;
+        kingNewPos.z = kingNewPos.z + 2;
+        transform.position = kingNewPos;
+        StopAllCoroutines();
+    }
+
 }
