@@ -17,6 +17,8 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
         currentLifeTime = playerlifeTime;
         EventManager.Instance.DieKingEvent += PlayerBecomeKing;
     }
+
+   
     private void Update()
     {
         if(player.GetPlayerState() == playerState.King)
