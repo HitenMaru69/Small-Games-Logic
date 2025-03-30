@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Net.NetworkInformation;
 using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
@@ -7,7 +6,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float enemySpeed;
     [SerializeField] GameObject knife;
     [SerializeField] float rotationSpeed;
-
 
     private float totalTime = 10;
     private float currentTime = 0;
@@ -20,7 +18,6 @@ public class EnemyAI : MonoBehaviour
         EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill; ;
     }
 
-
     private void OnDisable()
     {
         EventManager.Instance.CheckEnemyTryToKill -= OnPlayerTurn;
@@ -32,7 +29,6 @@ public class EnemyAI : MonoBehaviour
     {
         StartCoroutine(GoingTowerdPlayer());
     }
-
 
     // Follow Player
     IEnumerator GoingTowerdPlayer()
@@ -94,6 +90,7 @@ public class EnemyAI : MonoBehaviour
         if (isGoingForKill && currentTime >= 3) 
         {
             Debug.Log("Player catch the enemy");
+            EventManager.Instance.InvokeCatchKillerEvent();
         }
         else if(isGoingForKill && currentTime <= 3)
         {
@@ -103,10 +100,12 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+    // Restart To Try Kill Player If Player can not Catch Enemy
     private void AgainStartToKill(object sender, System.EventArgs e)
     {
         currentTime = 0;
         StartCoroutine(TryToKillPlayer());
     }
-    
+ 
+
 }

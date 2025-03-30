@@ -61,7 +61,7 @@ public class Gards : MonoBehaviour
         transform.rotation = Quaternion.identity;
 
         // Temp Solution
-        SceneManager.LoadScene("KillTheKing"); 
+       // SceneManager.LoadScene("KillTheKing"); 
         // Plan to not load Scene but again player go for king and start same game play again whthout Load scene
         
     }
