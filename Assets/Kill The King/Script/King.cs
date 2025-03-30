@@ -32,10 +32,7 @@ public class King : MonoBehaviour
         StartCoroutine(TryToCatchPlayer());
 
     }
-
-
-    [ContextMenu("TurnKing")]
-    public void TurnKing()
+    private void TurnKing()
     {
         transform.rotation = Quaternion.Euler(0, 180, 0);
         spawnWall.StopMovingWall();
@@ -48,8 +45,7 @@ public class King : MonoBehaviour
         //}
     }
 
-    [ContextMenu("BackToNormal")]
-    public void BackToNormal()
+    private void BackToNormal()
     {
         transform.rotation = Quaternion.identity;
         spawnWall.ResumeMovingWall();

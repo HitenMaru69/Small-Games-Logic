@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         EventManager.Instance.KillKingEvent += OnkillKing;
     }
 
-
+ 
     private void OnDisable()
     {
         EventManager.Instance.KillKingEvent -= OnkillKing;
@@ -59,6 +59,13 @@ public class Player : MonoBehaviour
     public playerState GetPlayerState()
     {
         return state;
+    }
+
+    public void PlayerDie()
+    {
+        Vector3 playerPos = transform.position;
+        playerPos.z = playerPos.z + 2;
+        transform.position = playerPos;
     }
 
     IEnumerator MovePlayerTowordsTheKing()
