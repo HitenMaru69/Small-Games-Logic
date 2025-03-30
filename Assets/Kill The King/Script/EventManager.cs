@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
     public event EventHandler DieKingEvent;
     public event EventHandler CatchKillerEvent;
     public event EventHandler CheckEnemyTryToKill;
+    public event EventHandler EnemyagainTryToKillEvent;
     private void Awake()
     {
         Instance = this;
@@ -34,5 +35,9 @@ public class EventManager : MonoBehaviour
         CheckEnemyTryToKill?.Invoke(this,EventArgs.Empty);
     }
 
+    public void InvokeEnemyagainTryToKill() 
+    {
+        EnemyagainTryToKillEvent?.Invoke(this,EventArgs.Empty);
+    }
 
 }

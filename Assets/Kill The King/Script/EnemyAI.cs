@@ -12,9 +12,19 @@ public class EnemyAI : MonoBehaviour
     private float totalTime = 10;
     private float currentTime = 0;
     private bool isGoingForKill = false;
+
+
     private void OnEnable()
     {
-        
+        EventManager.Instance.CheckEnemyTryToKill += OnPlayerTurn;
+        EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill; ;
+    }
+
+
+    private void OnDisable()
+    {
+        EventManager.Instance.CheckEnemyTryToKill -= OnPlayerTurn;
+        EventManager.Instance.EnemyagainTryToKillEvent -= AgainStartToKill;
     }
 
     [ContextMenu("Test")]
@@ -75,4 +85,28 @@ public class EnemyAI : MonoBehaviour
         player.transform.rotation = Quaternion.Euler(0, 0, -90);
         knife.transform.localRotation = Quaternion.identity;
     }
+
+    private void OnPlayerTurn(object sender, System.EventArgs e)
+    {
+        StopAllCoroutines();
+
+        // Note:- In future Add Random number for the current Time 
+        if (isGoingForKill && currentTime >= 3) 
+        {
+            Debug.Log("Player catch the enemy");
+        }
+        else if(isGoingForKill && currentTime <= 3)
+        {
+            knife.transform.rotation = Quaternion.identity;
+            isGoingForKill = false;
+        }
+
+    }
+
+    private void AgainStartToKill(object sender, System.EventArgs e)
+    {
+        currentTime = 0;
+        StartCoroutine(TryToKillPlayer());
+    }
+    
 }

@@ -27,12 +27,14 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
             {
                 player.RotatePlayer(new Vector3(0f, 180f, 0f));
                 spawnWall.StopMovingWall();
+                EventManager.Instance.InvokeCheckEnemyTryToKill();
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 player.RotatePlayer(new Vector3(0f, 0f, 0f));
                 spawnWall.ResumeMovingWall();
+                EventManager.Instance.InvokeEnemyagainTryToKill();
             }
 
         }
