@@ -11,10 +11,11 @@ public class Gards : MonoBehaviour
 
     private bool isMoveToCatchPlayer;
     private float dis;
-
+    private Player playerscript;
     private void Start()
     {
         isMoveToCatchPlayer = false;
+        playerscript = FindAnyObjectByType<Player>();
         EventManager.Instance.CatchKillerEvent += MoveToCatchPlayer;
     }
 
@@ -60,10 +61,18 @@ public class Gards : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
 
-        // Temp Solution
-       // SceneManager.LoadScene("KillTheKing"); 
-        // Plan to not load Scene but again player go for king and start same game play again whthout Load scene
-        
+
+        if(playerscript.GetPlayerState() == playerState.King)
+        {
+            EventManager.Instance.InvokeSpawnNewEnemyEvent();
+        }
+        else
+        {
+            // Temp Solution
+            // SceneManager.LoadScene("KillTheKing"); 
+            // Plan to not load Scene but again player go for king and start same game play again whthout Load scene
+        }
+
     }
 
     private void MoveToCatchPlayer(object sender, System.EventArgs e)

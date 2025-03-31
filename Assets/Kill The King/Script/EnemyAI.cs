@@ -1,27 +1,40 @@
 using System.Collections;
 using UnityEngine;
+
+
+public enum EnemyState
+{
+    GoingForKill,
+    CatchByPlayer
+}
+
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] float enemySpeed;
     [SerializeField] GameObject knife;
     [SerializeField] float rotationSpeed;
-
+    [SerializeField] EnemyState enemyState;
     private float totalTime = 10;
     private float currentTime = 0;
     private bool isGoingForKill = false;
 
 
+
     private void OnEnable()
     {
+        enemyState = EnemyState.GoingForKill;
+
         EventManager.Instance.CheckEnemyTryToKill += OnPlayerTurn;
-        EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill; ;
+        EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill;
+        EventManager.Instance.SpawnNewEnemyEvent += SpawnEnemy;
     }
 
     private void OnDisable()
     {
         EventManager.Instance.CheckEnemyTryToKill -= OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent -= AgainStartToKill;
+        EventManager.Instance.SpawnNewEnemyEvent -= SpawnEnemy;
     }
 
     [ContextMenu("Test")]
@@ -90,7 +103,9 @@ public class EnemyAI : MonoBehaviour
         if (isGoingForKill && currentTime >= 3) 
         {
             Debug.Log("Player catch the enemy");
+            enemyState = EnemyState.CatchByPlayer;
             EventManager.Instance.InvokeCatchKillerEvent();
+
         }
         else if(isGoingForKill && currentTime <= 3)
         {
@@ -103,9 +118,23 @@ public class EnemyAI : MonoBehaviour
     // Restart To Try Kill Player If Player can not Catch Enemy
     private void AgainStartToKill(object sender, System.EventArgs e)
     {
-        currentTime = 0;
-        StartCoroutine(TryToKillPlayer());
+        if (enemyState == EnemyState.GoingForKill) 
+        {
+            currentTime = 0;
+            StartCoroutine(TryToKillPlayer());
+        }
+
     }
- 
+
+    private void SpawnEnemy(object sender, System.EventArgs e)
+    {
+        knife.transform.rotation = Quaternion.identity;
+        enemyState = EnemyState.GoingForKill;
+        currentTime = 0;
+        Test();
+
+        // Logic for Spwan Different enemy
+    }
+
 
 }
