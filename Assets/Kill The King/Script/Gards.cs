@@ -2,13 +2,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum GardType
+{
+    Main,
+    Normal
+}
+
 public class Gards : MonoBehaviour
 {
 
     [SerializeField] Transform startPos;
     [SerializeField] GameObject player;
     [SerializeField] float gardMoveSpeed;
-
+    [SerializeField] GardType gardType;
     private bool isMoveToCatchPlayer;
     private float dis;
     private Player playerscript;
@@ -62,7 +68,7 @@ public class Gards : MonoBehaviour
         transform.rotation = Quaternion.identity;
 
 
-        if(playerscript.GetPlayerState() == playerState.King)
+        if(playerscript.GetPlayerState() == playerState.King && gardType == GardType.Main)
         {
             EventManager.Instance.InvokeSpawnNewEnemyEvent();
         }

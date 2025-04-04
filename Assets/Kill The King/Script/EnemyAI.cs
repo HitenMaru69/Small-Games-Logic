@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -15,15 +17,18 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] GameObject knife;
     [SerializeField] float rotationSpeed;
     [SerializeField] EnemyState enemyState;
+    [SerializeField] List<GameObject> enemyHat;
+
     private float totalTime = 10;
     private float currentTime = 0;
     private bool isGoingForKill = false;
-
+    [SerializeField]private int currentEnemyNumber = 0;
 
 
     private void OnEnable()
     {
         enemyState = EnemyState.GoingForKill;
+        currentEnemyNumber = 0;
 
         EventManager.Instance.CheckEnemyTryToKill += OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill;
@@ -128,14 +133,36 @@ public class EnemyAI : MonoBehaviour
 
     private void SpawnEnemy(object sender, System.EventArgs e)
     {
+        Debug.Log("How many time this called");
         StopAllCoroutines();
         knife.transform.rotation = Quaternion.identity;
         enemyState = EnemyState.GoingForKill;
         currentTime = 0;
+        ChangeEnemy();
         Test();
 
         // Logic for Spwan Different enemy
     }
 
+    private void ChangeEnemy()
+    {
+        if(currentEnemyNumber < enemyHat.Count -1)
+        {
+            currentEnemyNumber++;
+        }
+        else { currentEnemyNumber = 0; }
+        
+        for (int i = 0; i < enemyHat.Count; i++)
+        {
+            if(i == currentEnemyNumber)
+            {
+                enemyHat[i].SetActive(true);
+            }
+            else
+            {
+                enemyHat[i].SetActive(false);
+            }
+        }
+    }
 
 }

@@ -611,6 +611,30 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: enemyHat.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: 'enemyHat.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1262396457}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: 'enemyHat.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1305904218}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: 'enemyHat.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2116779310}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: 'enemyHat.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1425745136}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: 'enemyHat.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1425745136}
     - target: {fileID: 4831225021454147425, guid: 8b8128791a620fb43b078f693310749f, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -836,9 +860,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 1.37, y: 0, z: 0}
+--- !u!1 &1262396457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7210834585694727107, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+  m_PrefabInstance: {fileID: 948680268}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1305904218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6629916193946637314, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+  m_PrefabInstance: {fileID: 948680268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1393138513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4831225021454147425, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+  m_PrefabInstance: {fileID: 948680268}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1425745136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4787687595437247578, guid: 8b8128791a620fb43b078f693310749f, type: 3}
   m_PrefabInstance: {fileID: 948680268}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1432106564
@@ -967,6 +1006,7 @@ MonoBehaviour:
   startPos: {fileID: 1711807262}
   player: {fileID: 1393138513}
   gardMoveSpeed: 5
+  gardType: 1
 --- !u!1 &1487129537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,6 +1505,12 @@ MonoBehaviour:
   startPos: {fileID: 1711807262}
   player: {fileID: 1393138513}
   gardMoveSpeed: 5
+  gardType: 0
+--- !u!1 &2116779310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4510112941732642006, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+  m_PrefabInstance: {fileID: 948680268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4618312689387204
 PrefabInstance:
   m_ObjectHideFlags: 0
