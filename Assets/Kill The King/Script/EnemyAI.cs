@@ -128,6 +128,7 @@ public class EnemyAI : MonoBehaviour
 
     private void SpawnEnemy(object sender, System.EventArgs e)
     {
+        StopAllCoroutines();
         knife.transform.rotation = Quaternion.identity;
         enemyState = EnemyState.GoingForKill;
         currentTime = 0;
