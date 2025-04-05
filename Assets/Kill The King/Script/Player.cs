@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float distance;
 
     private float distanceBetweenPlayerAndKing = 4;
+    private bool isKingAlive;
 
     [Space(10)]
     [Header("For Player State")]
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        isKingAlive = true;
         state = playerState.Player;
         distance = Vector3.Distance(transform.position, king.transform.position);
         StartCoroutine(MovePlayerTowordsTheKing());
@@ -61,6 +63,11 @@ public class Player : MonoBehaviour
         return state;
     }
 
+    public void SetPlayerState(playerState playerState)
+    {
+        state = playerState;
+    }
+
     public void PlayerDie()
     {
         Vector3 playerPos = transform.position;
@@ -77,13 +84,16 @@ public class Player : MonoBehaviour
             yield return null;
         }
 
-        if(state == playerState.King)
+
+        if (!isKingAlive) 
         {
+            state = playerState.King;
             knife.gameObject.SetActive(false);
             eye.gameObject.SetActive(true);
             spawnWall.ResumeMovingWall();
             king.SetActive(false);
         }
+
 
     }
 
@@ -91,7 +101,7 @@ public class Player : MonoBehaviour
     {
         distanceBetweenPlayerAndKing = 2.1f;
         AttactWithKnife();
-        state = playerState.King;
+        isKingAlive = false;
         StartCoroutine(MovePlayerTowordsTheKing());
         EventManager.Instance.InvokeDieKingEvent();
     }

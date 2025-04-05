@@ -11,6 +11,7 @@ public class EventManager : MonoBehaviour
     public event EventHandler CheckEnemyTryToKill;
     public event EventHandler EnemyagainTryToKillEvent;
     public event EventHandler SpawnNewEnemyEvent;
+    public event EventHandler StartEnemyAIEvent;
 
     private void Awake()
     {
@@ -45,6 +46,11 @@ public class EventManager : MonoBehaviour
     public void InvokeSpawnNewEnemyEvent()
     {
         SpawnNewEnemyEvent?.Invoke(this,EventArgs.Empty);
+    }
+
+    public void InvokeStartEnemyAIEvent()
+    {
+        StartEnemyAIEvent?.Invoke(this,EventArgs.Empty);
     }
 
 }

@@ -48,6 +48,7 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     IEnumerator PlayerTimeForKing()
     {
         yield return new WaitForSeconds(1);
+        EventManager.Instance.InvokeStartEnemyAIEvent();
         image = gamePlay.GetSliderImage();
         image.fillAmount = 1f;
         while(currentLifeTime > 0f)
@@ -58,10 +59,17 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
             yield return null;
         }
 
+        PlayerDieAsKing();
+    }
+
+    private void PlayerDieAsKing()
+    {
+        Debug.Log("Player die as king");
     }
 
     private void PlayerBecomeKing(object sender, System.EventArgs e)
     {
         StartCoroutine(PlayerTimeForKing());
     }
+
 }

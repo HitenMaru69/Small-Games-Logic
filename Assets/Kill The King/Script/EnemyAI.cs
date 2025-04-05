@@ -30,13 +30,17 @@ public class EnemyAI : MonoBehaviour
         enemyState = EnemyState.GoingForKill;
         currentEnemyNumber = 0;
 
+        EventManager.Instance.StartEnemyAIEvent += EnemyATSpawn;
         EventManager.Instance.CheckEnemyTryToKill += OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill;
         EventManager.Instance.SpawnNewEnemyEvent += SpawnEnemy;
     }
 
+
+
     private void OnDisable()
     {
+        EventManager.Instance.StartEnemyAIEvent -= EnemyATSpawn;
         EventManager.Instance.CheckEnemyTryToKill -= OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent -= AgainStartToKill;
         EventManager.Instance.SpawnNewEnemyEvent -= SpawnEnemy;
@@ -51,7 +55,6 @@ public class EnemyAI : MonoBehaviour
     // Follow Player
     IEnumerator GoingTowerdPlayer()
     {
-
         float dis = Vector3.Distance(transform.position, player.transform.position);
 
         while (dis >= 3f)
@@ -61,7 +64,7 @@ public class EnemyAI : MonoBehaviour
             dis = Vector3.Distance(transform.position, player.transform.position);
             yield return null;
         }
-        
+
         StartCoroutine(TryToKillPlayer());  // Enemy Reach to the player and try to kill player
     }
 
@@ -100,6 +103,32 @@ public class EnemyAI : MonoBehaviour
         knife.transform.localRotation = Quaternion.identity;
     }
 
+    private void ChangeEnemy()
+    {
+        if (currentEnemyNumber < enemyHat.Count - 1)
+        {
+            currentEnemyNumber++;
+        }
+        else { currentEnemyNumber = 0; }
+
+        for (int i = 0; i < enemyHat.Count; i++)
+        {
+            if (i == currentEnemyNumber)
+            {
+                enemyHat[i].SetActive(true);
+            }
+            else
+            {
+                enemyHat[i].SetActive(false);
+            }
+        }
+    }
+
+    private void EnemyATSpawn(object sender, System.EventArgs e)
+    {
+        StartCoroutine(GoingTowerdPlayer());
+    }
+
     private void OnPlayerTurn(object sender, System.EventArgs e)
     {
         StopAllCoroutines();
@@ -133,36 +162,14 @@ public class EnemyAI : MonoBehaviour
 
     private void SpawnEnemy(object sender, System.EventArgs e)
     {
-        Debug.Log("How many time this called");
         StopAllCoroutines();
         knife.transform.rotation = Quaternion.identity;
         enemyState = EnemyState.GoingForKill;
         currentTime = 0;
         ChangeEnemy();
-        Test();
-
-        // Logic for Spwan Different enemy
+        StartCoroutine(GoingTowerdPlayer());
     }
 
-    private void ChangeEnemy()
-    {
-        if(currentEnemyNumber < enemyHat.Count -1)
-        {
-            currentEnemyNumber++;
-        }
-        else { currentEnemyNumber = 0; }
-        
-        for (int i = 0; i < enemyHat.Count; i++)
-        {
-            if(i == currentEnemyNumber)
-            {
-                enemyHat[i].SetActive(true);
-            }
-            else
-            {
-                enemyHat[i].SetActive(false);
-            }
-        }
-    }
+
 
 }
