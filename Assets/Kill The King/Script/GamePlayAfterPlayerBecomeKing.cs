@@ -59,12 +59,13 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
             yield return null;
         }
 
+        EventManager.Instance.InvokeStopEnemyAIAttckToPlayerEvnet();
         PlayerDieAsKing();
     }
 
     private void PlayerDieAsKing()
     {
-        Debug.Log("Player die as king");
+        player.PlayerDie();
     }
 
     private void PlayerBecomeKing(object sender, System.EventArgs e)

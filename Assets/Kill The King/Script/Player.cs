@@ -4,7 +4,8 @@ using UnityEngine;
 public enum playerState
 {
     Player,
-    King
+    King,
+    Die
 }
 
 public class Player : MonoBehaviour
@@ -70,6 +71,8 @@ public class Player : MonoBehaviour
 
     public void PlayerDie()
     {
+        state = playerState.Die;
+        transform.rotation = Quaternion.Euler(0, 0, -90);
         Vector3 playerPos = transform.position;
         playerPos.z = playerPos.z + 2;
         transform.position = playerPos;

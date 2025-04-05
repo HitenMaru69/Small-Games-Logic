@@ -34,9 +34,8 @@ public class EnemyAI : MonoBehaviour
         EventManager.Instance.CheckEnemyTryToKill += OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill;
         EventManager.Instance.SpawnNewEnemyEvent += SpawnEnemy;
+        EventManager.Instance.StopEnemyAIAttckToPlayerEvnet += StopEnemyAI;
     }
-
-
 
     private void OnDisable()
     {
@@ -44,6 +43,8 @@ public class EnemyAI : MonoBehaviour
         EventManager.Instance.CheckEnemyTryToKill -= OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent -= AgainStartToKill;
         EventManager.Instance.SpawnNewEnemyEvent -= SpawnEnemy;
+        EventManager.Instance.StopEnemyAIAttckToPlayerEvnet -= StopEnemyAI;
+
     }
 
     [ContextMenu("Test")]
@@ -72,6 +73,7 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator TryToKillPlayer()
     {
+
         isGoingForKill = true;
 
         while(currentTime < totalTime)
@@ -99,7 +101,7 @@ public class EnemyAI : MonoBehaviour
         Vector3 newPos = knife.transform.localPosition;
         newPos.x = -2.2f;
         knife.transform.localPosition = newPos;
-        player.transform.rotation = Quaternion.Euler(0, 0, -90);
+        //player.transform.rotation = Quaternion.Euler(0, 0, -90);
         knife.transform.localRotation = Quaternion.identity;
     }
 
@@ -170,6 +172,13 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(GoingTowerdPlayer());
     }
 
+    private void StopEnemyAI(object sender, System.EventArgs e)
+    {
+        StopAllCoroutines();
+        knife.transform.rotation = Quaternion.identity;
+        isGoingForKill = false;
+
+    }
 
 
 }
