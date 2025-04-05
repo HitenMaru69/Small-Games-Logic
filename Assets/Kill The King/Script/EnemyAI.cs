@@ -18,16 +18,18 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] EnemyState enemyState;
     [SerializeField] List<GameObject> enemyHat;
+    [SerializeField] GameObject eyeGlass;
 
     private float totalTime = 10;
     private float currentTime = 0;
     private bool isGoingForKill = false;
-    [SerializeField]private int currentEnemyNumber = 0;
+    private int currentEnemyNumber = 0;
 
 
     private void OnEnable()
     {
         enemyState = EnemyState.GoingForKill;
+        eyeGlass.SetActive(false);
         currentEnemyNumber = 0;
 
         EventManager.Instance.StartEnemyAIEvent += EnemyATSpawn;
@@ -177,8 +179,35 @@ public class EnemyAI : MonoBehaviour
         StopAllCoroutines();
         knife.transform.rotation = Quaternion.identity;
         isGoingForKill = false;
+        StartCoroutine(EnemyBecomeKing());
 
     }
 
+    IEnumerator EnemyBecomeKing()
+    {
+        float dis = Vector3.Distance(transform.position, player.transform.position);
+
+        while (dis > 2.3f)
+        {
+
+            transform.Translate(Vector3.right * enemySpeed * Time.deltaTime);
+            dis = Vector3.Distance(transform.position, player.transform.position);
+            yield return null;
+
+            Debug.Log(dis);
+        }
+
+        foreach(GameObject obj in enemyHat)
+        {
+            obj.SetActive(false);
+        }
+        eyeGlass.SetActive(true);
+        knife.SetActive(false);
+        player.gameObject.SetActive(false);
+    }
 
 }
+
+// When player die than show a One UI 
+// So during this UI all things will be set agian like game is start 
+// Like king will set active true , enemy will goes it place like this
