@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 751220011}
   - component: {fileID: 751220010}
   - component: {fileID: 751220012}
+  - component: {fileID: 751220013}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: Untagged
@@ -613,8 +614,24 @@ MonoBehaviour:
   gamePlay: {fileID: 751220010}
   spawnWall: {fileID: 68716398}
   enemyAI: {fileID: 948680269}
-  playerlifeTime: 20
+  playerlifeTime: 80
+--- !u!114 &751220013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751220009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c8dda4acfccb040840fdc73847ed38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   loadingCanvas: {fileID: 1618111670}
+  resetObject:
+  - {fileID: 640511538}
+  - {fileID: 2030010328}
+  - {fileID: 1393138513}
 --- !u!1 &918980055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6482012124397706405, guid: ba92bed8f24b5f74caf39567d152db6e, type: 3}

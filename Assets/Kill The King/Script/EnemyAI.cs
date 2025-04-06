@@ -28,11 +28,14 @@ public class EnemyAI : MonoBehaviour
 
     private void OnEnable()
     {
+
         enemyState = EnemyState.GoingForKill;
         isGoingForKill = false;
         eyeGlass.SetActive(false);
         currentEnemyNumber = 0;
-
+        currentTime = 0;
+        ResetKnife();
+        
         EventManager.Instance.StartEnemyAIEvent += EnemyATSpawn;
         EventManager.Instance.CheckEnemyTryToKill += OnPlayerTurn;
         EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill;
@@ -91,10 +94,11 @@ public class EnemyAI : MonoBehaviour
         }
 
         // Player Kill Functionality
-
+ 
         Player p = player.GetComponent<Player>();
         KnifePositionAfterAttack();
         p.PlayerDie();
+        EventManager.Instance.InvokeStopEnemyAIAttckToPlayerEvnet();
     }
 
     private void RotateKnife()  // To Rotate Knife
@@ -108,8 +112,8 @@ public class EnemyAI : MonoBehaviour
         Vector3 newPos = knife.transform.localPosition;
         newPos.x = -2.2f;
         knife.transform.localPosition = newPos;
-        //player.transform.rotation = Quaternion.Euler(0, 0, -90);
         knife.transform.localRotation = Quaternion.identity;
+        
     }
 
     private void ChangeEnemy()
@@ -131,6 +135,17 @@ public class EnemyAI : MonoBehaviour
                 enemyHat[i].SetActive(false);
             }
         }
+    }
+
+    private void ResetKnife()
+    {
+        knife.transform.parent = this.transform;
+        Vector3 newPos = knife.transform.localPosition;
+        newPos.x = -0.294f;
+        newPos.y = 0f;
+        newPos.z = 0f;
+        knife.transform.localPosition = newPos;
+
     }
 
     private void EnemyATSpawn(object sender, System.EventArgs e)
@@ -182,7 +197,7 @@ public class EnemyAI : MonoBehaviour
     private void StopEnemyAI(object sender, System.EventArgs e)
     {
         StopAllCoroutines();
-        knife.transform.rotation = Quaternion.identity;
+        knife.transform.localRotation = Quaternion.identity;
         isGoingForKill = false;
         StartCoroutine(EnemyBecomeKing());
 
@@ -199,7 +214,6 @@ public class EnemyAI : MonoBehaviour
             dis = Vector3.Distance(transform.position, player.transform.position);
             yield return null;
 
-            Debug.Log(dis);
         }
 
         foreach(GameObject obj in enemyHat)

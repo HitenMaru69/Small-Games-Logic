@@ -81,6 +81,7 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     private void ResetAllGamePlay(object sender, System.EventArgs e)
     {
         StopAllCoroutines();
+        gamePlay.ResetKillProgress();
         currentLifeTime = playerlifeTime;
 
     }

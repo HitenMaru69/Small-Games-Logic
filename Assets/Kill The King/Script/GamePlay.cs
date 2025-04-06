@@ -61,6 +61,13 @@ public class GamePlay : MonoBehaviour
         return slider;
     }
 
+    public void ResetKillProgress()
+    {
+        istryToKill = false;
+        currenttime = 0;
+        slider.fillAmount = 0;
+    }
+
     private void UpdateKillProgress()
     {
         if (currenttime < totalTimeToKill) 
@@ -75,13 +82,6 @@ public class GamePlay : MonoBehaviour
             ResetKillProgress();
             EventManager.Instance.InvokeKillKingEvent();
         }
-    }
-
-    private void ResetKillProgress()
-    {
-        istryToKill=false;
-        currenttime = 0;
-        slider.fillAmount = 0;
     }
 
     private void ChangeSliderValue(object sender, System.EventArgs e)
