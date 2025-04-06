@@ -9,7 +9,6 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     [SerializeField] SpawnWall spawnWall;
     [SerializeField] EnemyAI enemyAI;
     [SerializeField] float playerlifeTime;
-    [SerializeField] Canvas loadingCanvas;
 
     private Image image;
     private float currentLifeTime;
@@ -82,7 +81,7 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     private void ResetAllGamePlay(object sender, System.EventArgs e)
     {
         StopAllCoroutines();
-       // loadingCanvas.enabled = true;
+        currentLifeTime = playerlifeTime;
 
     }
 

@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour
     private void OnEnable()
     {
         enemyState = EnemyState.GoingForKill;
+        isGoingForKill = false;
         eyeGlass.SetActive(false);
         currentEnemyNumber = 0;
 
@@ -221,7 +222,3 @@ public class EnemyAI : MonoBehaviour
     }
 
 }
-
-// When player die than show a One UI 
-// So during this UI all things will be set agian like game is start 
-// Like king will set active true , enemy will goes it place like this
