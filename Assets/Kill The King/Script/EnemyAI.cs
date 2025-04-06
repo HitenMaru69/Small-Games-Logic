@@ -9,7 +9,6 @@ public enum EnemyState
     GoingForKill,
     CatchByPlayer
 }
-
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] GameObject player;
@@ -19,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] EnemyState enemyState;
     [SerializeField] List<GameObject> enemyHat;
     [SerializeField] GameObject eyeGlass;
+    [SerializeField] Transform enemyStartPos;
 
     private float totalTime = 10;
     private float currentTime = 0;
@@ -37,7 +37,10 @@ public class EnemyAI : MonoBehaviour
         EventManager.Instance.EnemyagainTryToKillEvent += AgainStartToKill;
         EventManager.Instance.SpawnNewEnemyEvent += SpawnEnemy;
         EventManager.Instance.StopEnemyAIAttckToPlayerEvnet += StopEnemyAI;
+        EventManager.Instance.PlayerTimeUpAsKingEvent += ResetEnemy;
     }
+
+
 
     private void OnDisable()
     {
@@ -46,6 +49,7 @@ public class EnemyAI : MonoBehaviour
         EventManager.Instance.EnemyagainTryToKillEvent -= AgainStartToKill;
         EventManager.Instance.SpawnNewEnemyEvent -= SpawnEnemy;
         EventManager.Instance.StopEnemyAIAttckToPlayerEvnet -= StopEnemyAI;
+        EventManager.Instance.PlayerTimeUpAsKingEvent -= ResetEnemy;
 
     }
 
@@ -204,6 +208,16 @@ public class EnemyAI : MonoBehaviour
         eyeGlass.SetActive(true);
         knife.SetActive(false);
         player.gameObject.SetActive(false);
+        EventManager.Instance.InvokePlayeTimeupAsKingEvent();
+    }
+
+    private void ResetEnemy(object sender, System.EventArgs e)
+    {
+        transform.position = enemyStartPos.position;
+        eyeGlass.SetActive(false);
+        knife.SetActive(true);
+        this.gameObject.SetActive(false);
+
     }
 
 }

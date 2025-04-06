@@ -612,7 +612,9 @@ MonoBehaviour:
   player: {fileID: 2030010334}
   gamePlay: {fileID: 751220010}
   spawnWall: {fileID: 68716398}
+  enemyAI: {fileID: 948680269}
   playerlifeTime: 20
+  loadingCanvas: {fileID: 0}
 --- !u!1 &918980055 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6482012124397706405, guid: ba92bed8f24b5f74caf39567d152db6e, type: 3}
@@ -642,6 +644,10 @@ PrefabInstance:
       propertyPath: enemySpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+      propertyPath: enemyStartPos
+      value: 
+      objectReference: {fileID: 644689276}
     - target: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
       propertyPath: rotationSpeed
       value: 10
@@ -719,11 +725,53 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+--- !u!114 &948680269 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1602895744846248888, guid: 8b8128791a620fb43b078f693310749f, type: 3}
+  m_PrefabInstance: {fileID: 948680268}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393138513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f11efa671b4772442a434bd95bb9de1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1004832277 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8205622999450355016, guid: 8b8128791a620fb43b078f693310749f, type: 3}
   m_PrefabInstance: {fileID: 948680268}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1104771574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1104771575}
+  m_Layer: 0
+  m_Name: 'KingStartPosition '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1104771575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104771574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5, y: 1.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1109063988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,6 +1743,10 @@ PrefabInstance:
       propertyPath: spawnWall
       value: 
       objectReference: {fileID: 68716398}
+    - target: {fileID: 5231831743698895516, guid: a60575d66313d7648966f31cc90acf6d, type: 3}
+      propertyPath: kingStartPos
+      value: 
+      objectReference: {fileID: 1104771575}
     - target: {fileID: 7664939242378860570, guid: a60575d66313d7648966f31cc90acf6d, type: 3}
       propertyPath: m_Name
       value: King
@@ -1850,6 +1902,10 @@ PrefabInstance:
       propertyPath: spawnWall
       value: 
       objectReference: {fileID: 68716398}
+    - target: {fileID: 7045674680775316856, guid: 4109a740dbbf68a4b898d64a24e384c6, type: 3}
+      propertyPath: playrStartPos
+      value: 
+      objectReference: {fileID: 1185570417}
     - target: {fileID: 7754339567095841390, guid: 4109a740dbbf68a4b898d64a24e384c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.18
@@ -1988,3 +2044,4 @@ SceneRoots:
   - {fileID: 1711807262}
   - {fileID: 1185570417}
   - {fileID: 644689276}
+  - {fileID: 1104771575}

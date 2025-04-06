@@ -7,7 +7,9 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] GamePlay gamePlay;
     [SerializeField] SpawnWall spawnWall;
+    [SerializeField] EnemyAI enemyAI;
     [SerializeField] float playerlifeTime;
+    [SerializeField] Canvas loadingCanvas;
 
     private Image image;
     private float currentLifeTime;
@@ -16,9 +18,9 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     {
         currentLifeTime = playerlifeTime;
         EventManager.Instance.DieKingEvent += PlayerBecomeKing;
+        EventManager.Instance.PlayerTimeUpAsKingEvent += ResetAllGamePlay;
     }
 
-   
     private void Update()
     {
         if(player.GetPlayerState() == playerState.King)
@@ -43,6 +45,7 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
     private void OnDisable()
     {
         EventManager.Instance.DieKingEvent -= PlayerBecomeKing;
+        EventManager.Instance.PlayerTimeUpAsKingEvent -= ResetAllGamePlay;
     }
 
     IEnumerator PlayerTimeForKing()
@@ -68,9 +71,19 @@ public class GamePlayAfterPlayerBecomeKing : MonoBehaviour
         player.PlayerDie();
     }
 
+
+
     private void PlayerBecomeKing(object sender, System.EventArgs e)
     {
         StartCoroutine(PlayerTimeForKing());
+    }
+
+
+    private void ResetAllGamePlay(object sender, System.EventArgs e)
+    {
+        StopAllCoroutines();
+       // loadingCanvas.enabled = true;
+
     }
 
 }

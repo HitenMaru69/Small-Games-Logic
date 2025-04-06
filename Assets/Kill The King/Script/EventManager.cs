@@ -13,6 +13,7 @@ public class EventManager : MonoBehaviour
     public event EventHandler SpawnNewEnemyEvent;
     public event EventHandler StartEnemyAIEvent;
     public event EventHandler StopEnemyAIAttckToPlayerEvnet;
+    public event EventHandler PlayerTimeUpAsKingEvent;
 
     private void Awake()
     {
@@ -57,6 +58,11 @@ public class EventManager : MonoBehaviour
     public void InvokeStopEnemyAIAttckToPlayerEvnet()
     {
         StopEnemyAIAttckToPlayerEvnet?.Invoke(this,EventArgs.Empty);
+    }
+
+    public void InvokePlayeTimeupAsKingEvent()
+    {
+        PlayerTimeUpAsKingEvent?.Invoke(this,EventArgs.Empty);
     }
 
 }

@@ -15,8 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject knife;
     [SerializeField] GameObject eye;
     [SerializeField] float knifeRotateSpeed;
-    [SerializeField] private float distance;
+    [SerializeField] Transform playrStartPos;
 
+    private float distance;
     private float distanceBetweenPlayerAndKing = 4;
     private bool isKingAlive;
 
@@ -28,17 +29,16 @@ public class Player : MonoBehaviour
 
     
 
-    private void Start()
+    private void OnEnable()
     {
-        isKingAlive = true;
-        state = playerState.Player;
+        ResetPlayer();
         distance = Vector3.Distance(transform.position, king.transform.position);
         StartCoroutine(MovePlayerTowordsTheKing());
 
         EventManager.Instance.KillKingEvent += OnkillKing;
     }
 
- 
+
     private void OnDisable()
     {
         EventManager.Instance.KillKingEvent -= OnkillKing;
@@ -99,6 +99,42 @@ public class Player : MonoBehaviour
 
 
     }
+    private void AttactWithKnife()
+    {
+        knife.transform.parent = king.transform;
+        Vector3 newPos = knife.transform.localPosition;
+        newPos.x = -2.2f;
+        knife.transform.localPosition = newPos;
+        king.transform.rotation = Quaternion.Euler(0, 0, -90);
+        knife.transform.localRotation = Quaternion.identity;
+    }
+
+    private void ResetPlayer()
+    {
+        StopAllCoroutines();
+        transform.position = playrStartPos.position;
+        transform.rotation = Quaternion.identity;
+        state = playerState.Player;
+        ResetKnife();
+        eye.gameObject.SetActive(false);
+        knife.SetActive(true);
+        isKingAlive = true;
+        distanceBetweenPlayerAndKing = 4;
+
+
+    }
+
+    private void ResetKnife()
+    {
+        knife.transform.parent = this.transform;
+        Vector3 newPos = knife.transform.localPosition;
+        newPos.x = -0.294f;
+        newPos.y = 0f;
+        newPos.z = 0f;
+        knife.transform.localPosition = newPos;
+        knife.transform.localRotation = Quaternion.identity;
+
+    }
 
     private void OnkillKing(object sender, System.EventArgs e)
     {
@@ -109,15 +145,5 @@ public class Player : MonoBehaviour
         EventManager.Instance.InvokeDieKingEvent();
     }
 
-
-    private void AttactWithKnife()
-    {
-        knife.transform.parent = king.transform;
-        Vector3 newPos = knife.transform.localPosition;
-        newPos.x = -2.2f;
-        knife.transform.localPosition = newPos;
-        king.transform.rotation = Quaternion.Euler(0, 0, -90);
-        knife.transform.localRotation = Quaternion.identity;
-    }
 
 }

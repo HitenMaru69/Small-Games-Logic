@@ -7,9 +7,13 @@ public class King : MonoBehaviour
     [SerializeField] Animation animations;
     [SerializeField] SpawnWall spawnWall;
     [SerializeField] GamePlay gamePlay;
-    
-    private void Start()
+    [SerializeField] Transform kingStartPos;
+
+    private void OnEnable()
     {
+        StopAllCoroutines();
+        transform.position = kingStartPos.position;
+        transform.rotation = Quaternion.identity;
         EventManager.Instance.DieKingEvent += OnKingDie;
         StartCoroutine(TryToCatchPlayer());
     }
