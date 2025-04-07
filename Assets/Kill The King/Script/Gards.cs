@@ -12,9 +12,12 @@ public class Gards : MonoBehaviour
 {
 
     [SerializeField] Transform startPos;
-    [SerializeField] GameObject player;
+    [SerializeField] GameObject playerObject;
+    [SerializeField] GameObject enemygameObject;
     [SerializeField] float gardMoveSpeed;
     [SerializeField] GardType gardType;
+
+    private GameObject catchObject;
     private bool isMoveToCatchPlayer;
     private float dis;
     private Player playerscript;
@@ -36,12 +39,12 @@ public class Gards : MonoBehaviour
     {
         if (isMoveToCatchPlayer) {
 
-            dis = Vector3.Distance(transform.position, player.transform.position);
+            dis = Vector3.Distance(transform.position, catchObject.transform.position);
 
             while (dis >= 3f)
             {
                 transform.Translate(Vector3.right * gardMoveSpeed * Time.deltaTime);
-                dis = Vector3.Distance(transform.position, player.transform.position);
+                dis = Vector3.Distance(transform.position, catchObject.transform.position);
                 yield return null;
             }
                 
@@ -55,6 +58,7 @@ public class Gards : MonoBehaviour
 
     IEnumerator ReturnTotheStartingPos()
     {
+
         dis = Vector3.Distance(transform.position, startPos.transform.position);
 
         while (dis >= 3f)
@@ -74,27 +78,33 @@ public class Gards : MonoBehaviour
         }
         else
         {
-            // Temp Solution
-            // SceneManager.LoadScene("KillTheKing"); 
-            // Plan to not load Scene but again player go for king and start same game play again whthout Load scene
+            //Temp Solution
+             SceneManager.LoadScene("KillTheKing");
+            //Plan to not load Scene but again player go for king and start same game play again whthout Load scene
         }
 
+    }
+
+    private void RestartScene()
+    {
+        SceneManager.LoadScene("KillTheKing");
+    }
+
+    private void PlayerMoveWithGards()
+    {
+        Vector3 playerPos = catchObject.transform.position;
+        Vector3 gardPos = transform.position;
+        playerPos.x = gardPos.x + 2;
+        catchObject.transform.position = playerPos;
     }
 
     private void MoveToCatchPlayer(object sender, System.EventArgs e)
     {
         isMoveToCatchPlayer = true;
+        if(playerscript.GetPlayerState() == playerState.Player) { catchObject = playerObject; }
+        else { catchObject = enemygameObject; }
         StartCoroutine(MoveTothePlayer());
     }
-
-    private void PlayerMoveWithGards()
-    {
-        Vector3 playerPos = player.transform.position;
-        Vector3 gardPos = transform.position;
-        playerPos.x = gardPos.x + 2;
-        player.transform.position = playerPos;
-    }
-
 
 
 

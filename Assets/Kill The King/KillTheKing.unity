@@ -1140,7 +1140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPos: {fileID: 1711807262}
-  player: {fileID: 1393138513}
+  playerObject: {fileID: 2030010328}
+  enemygameObject: {fileID: 1393138513}
   gardMoveSpeed: 5
   gardType: 1
 --- !u!1 &1487129537
@@ -1953,7 +1954,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPos: {fileID: 1711807262}
-  player: {fileID: 1393138513}
+  playerObject: {fileID: 2030010328}
+  enemygameObject: {fileID: 1393138513}
   gardMoveSpeed: 5
   gardType: 0
 --- !u!1 &2116779310 stripped

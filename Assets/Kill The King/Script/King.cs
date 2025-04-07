@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class King : MonoBehaviour
 {
@@ -41,12 +42,12 @@ public class King : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 180, 0);
         spawnWall.StopMovingWall();
 
-        //if (gamePlay.ChekIftryToKill() == true)
-        //{
-        //    EventManager.Instance.InvokeCatchKillerEvent();
-        //    StopAllCoroutines();
-        //    Debug.Log("Player diie");
-        //}
+        if (gamePlay.ChekIftryToKill() == true)
+        {
+            EventManager.Instance.InvokeCatchKillerEvent();
+            StopAllCoroutines();
+            Debug.Log("Player diie");
+        }
     }
 
     private void BackToNormal()
