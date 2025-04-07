@@ -71,23 +71,20 @@ public class Gards : MonoBehaviour
 
         transform.rotation = Quaternion.identity;
 
-
-        if(playerscript.GetPlayerState() == playerState.King && gardType == GardType.Main)
+        if (gardType == GardType.Main)
         {
-            EventManager.Instance.InvokeSpawnNewEnemyEvent();
-        }
-        else
-        {
-            //Temp Solution
-             SceneManager.LoadScene("KillTheKing");
-            //Plan to not load Scene but again player go for king and start same game play again whthout Load scene
-        }
 
-    }
-
-    private void RestartScene()
-    {
-        SceneManager.LoadScene("KillTheKing");
+            if (playerscript.GetPlayerState() == playerState.King && gardType == GardType.Main)
+            {
+                EventManager.Instance.InvokeSpawnNewEnemyEvent();
+            }
+            else
+            {
+                //Temp Solution
+                SceneManager.LoadScene("KillTheKing");
+                //Plan to not load Scene but again player go for king and start same game play again whthout Load scene
+            }
+        }
     }
 
     private void PlayerMoveWithGards()
